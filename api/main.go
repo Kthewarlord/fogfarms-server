@@ -1,24 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"./handler/modulegroup_management"
+	"./handler/plant_management"
+	"./handler/user_management"
 	"github.com/labstack/gommon/log"
-	_ "github.com/lib/pq"
-	"github.com/spf13/viper"
+	"net/http"
 	"os"
 )
-
-func init() {
-	viper.SetConfigFile(`config.json`)
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(err)
-	}
-
-	if viper.GetBool(`debug`) {
-		fmt.Println("Service RUN on DEBUG mode")
-	}
-}
 
 func main() {
 	if err := run(); err != nil {
@@ -28,5 +17,17 @@ func main() {
 }
 
 func run() error {
+	mux := http.NewServeMux()
 
+	moduleGroupManagementHandler := modulegroup_management.MakeHTTPHandler()
+	mux.Handle("/modulegroup_management", moduleGroupManagementHandler)
+
+	userManagementHandler := user_management.MakeHTTPHandler()
+	mux.Handle("/user_management", userManagementHandler)
+
+	plantManagementHandler := plant_management.MakeHTTPHandler()
+	mux.Handle("/plant_management", plantManagementHandler)
+
+	return http.ListenAndServe(":9090", mux)
 }
+

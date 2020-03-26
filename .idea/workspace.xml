@@ -2,9 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d770124b-efb5-4882-b4d8-54ca8965e534" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/kitap.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/database.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/handler/modulegroup_management/modulegroup_management.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/handler/plant_management/plant_management.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/handler/user_management/user_management.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modulegroup_management/services.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plant_management/services.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_management/services.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/handler/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/handler/auth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/repository/postgresql.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/services.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,12 +63,23 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api/handler/modulegroup_management" />
+      <recent name="$PROJECT_DIR$/api/handler" />
       <recent name="$PROJECT_DIR$/api" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/user" />
-      <recent name="$PROJECT_DIR$/models" />
-      <recent name="$PROJECT_DIR$/repository" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build fogfarms-server" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+      <module name="fogfarms-server" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/|$PROJECT_DIR$/api/main.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -91,17 +115,38 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="115" key="#Go_Modules_(vgo)/0.0.1440.900@0.0.1440.900" timestamp="1584337227004" />
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584238822322">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585235425871">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1584238822322" />
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235425871" />
     <state x="408" y="193" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584330371064">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="408" y="193" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900@0.0.1440.900" timestamp="1584330371064" />
+    <state x="415" y="93" key="#go_build_fogfarms-server" timestamp="1585235439721">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="415" y="93" key="#go_build_fogfarms-server/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235439721" />
     <state x="477" y="337" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1584257126896">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="477" y="337" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1584257126896" />
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom" timestamp="1585235444547">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444547" />
+    <state width="1398" height="303" key="GridCell.Tab.0.center" timestamp="1585235444545">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.0.center/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444545" />
+    <state width="1398" height="303" key="GridCell.Tab.0.left" timestamp="1585235444544">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.0.left/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444544" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right" timestamp="1585235444546">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.0.right/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444546" />
   </component>
 </project>
