@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d770124b-efb5-4882-b4d8-54ca8965e534" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/kitap.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/database.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/handler/modulegroup_management/modulegroup_management.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/handler/plant_management/plant_management.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/handler/user_management/user_management.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modulegroup_management/services.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plant_management/services.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_management/services.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/handler/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/handler/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/repository.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/repository/postgresql.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/services.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulegroup_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/modulegroup_management/services.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,21 +118,25 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="477" y="337" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1584257126896" />
-    <state width="1398" height="303" key="GridCell.Tab.0.bottom" timestamp="1585235444547">
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom" timestamp="1585239286492">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.0.bottom/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444547" />
-    <state width="1398" height="303" key="GridCell.Tab.0.center" timestamp="1585235444545">
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom/1440.-997.1080.1897/0.0.1440.900@0.0.1440.900" timestamp="1585239286492" />
+    <state width="1398" height="303" key="GridCell.Tab.0.center" timestamp="1585239286490">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.0.center/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444545" />
-    <state width="1398" height="303" key="GridCell.Tab.0.left" timestamp="1585235444544">
+    <state width="1398" height="303" key="GridCell.Tab.0.center/1440.-997.1080.1897/0.0.1440.900@0.0.1440.900" timestamp="1585239286490" />
+    <state width="1398" height="303" key="GridCell.Tab.0.left" timestamp="1585239286489">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.0.left/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444544" />
-    <state width="1398" height="303" key="GridCell.Tab.0.right" timestamp="1585235444546">
+    <state width="1398" height="303" key="GridCell.Tab.0.left/1440.-997.1080.1897/0.0.1440.900@0.0.1440.900" timestamp="1585239286489" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right" timestamp="1585239286491">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.0.right/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444546" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right/1440.-997.1080.1897/0.0.1440.900@0.0.1440.900" timestamp="1585239286491" />
   </component>
 </project>
