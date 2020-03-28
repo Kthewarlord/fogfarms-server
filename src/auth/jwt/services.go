@@ -2,9 +2,10 @@ package jwt
 
 import (
 	"../../../models"
-	"encoding/json"
+	"../../user"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"io"
 	"net/http"
 	"os"
 	"strings"
@@ -15,25 +16,25 @@ const (
 	bearerFormat string = "Bearer %s"
 )
 
-type Credentials struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
 type Claims struct {
 	Username string `json:"username"`
 	jwt.StandardClaims
 }
 
-func generateJwtToken(w http.ResponseWriter, r *http.Request) {
+func AuthenticateUser(w http.ResponseWriter, r *http.Request) {
 	secret := os.Getenv("SECRET_KEY_JWT")
 
-	var creds Credentials
-	err := json.NewDecoder(r.Body).Decode(&creds)
-	if err != nil {
-		w.Write(http.StatusInternalServerError)
-		return
+	username := r.Form.Get("username")
+	password := r.Form.Get("password")
+	if !user.Exists(username) {
+		w.WriteHeader(http.StatusUnauthorized)
+		io.WriteString(w, `{"error":"invalid_credentials"}"`)
+
+	} else {
+		if
 	}
+
+	expectedPassword, ok =
 
 	http.SetCookie(w, &http.Cookie{
 		Name: "jwtToken",

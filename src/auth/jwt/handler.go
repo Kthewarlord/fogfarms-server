@@ -13,6 +13,6 @@ func MakeHTTPHandler() http.Handler {
 }
 
 func SignIn(w http.ResponseWriter, r *http.Request) {
-
+	AuthenticateUser(w, r)
 }
 

@@ -19,7 +19,7 @@ var connectionString string = fmt.Sprintf("port=%d host=%s user=%s "+
 	"password=%s dbname=%s sslmode=disable",
 	DbPort, DbHost, DbUser, DbPass, DbName)
 
-func getAllUsers() []models.User {
+func GetAllUsers() []models.User {
 	db, err := sql.Open("postgres", connectionString)
 	if err != nil {
 		panic(err)

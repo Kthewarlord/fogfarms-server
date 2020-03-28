@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d770124b-efb5-4882-b4d8-54ca8965e534" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth/jwt/handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth/jwt/services.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/repository.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/repository/postgres.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/services.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/handler/auth.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/handler/modulegroup_management/modulegroup_management.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/modulegroup_management/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/handler/plant_management/plant_management.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/plant_management/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/handler/user_management/user_management.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user_management/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulegroup_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/modulegroup_management/services.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plant_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/plant_management/services.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user_management/services.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/jwt/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/jwt/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/jwt/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/jwt/services.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/repository/postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/repository/postgres.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/services.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,11 +67,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models" />
+      <recent name="$PROJECT_DIR$/src/user" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/auth/jwt" />
       <recent name="$PROJECT_DIR$/src/user_management" />
-      <recent name="$PROJECT_DIR$/src/plant_management" />
-      <recent name="$PROJECT_DIR$/src/modulegroup_management" />
     </key>
   </component>
   <component name="RunManager">
