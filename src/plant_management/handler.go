@@ -7,10 +7,10 @@ import (
 )
 
 func MakeHTTPHandler() http.Handler {
-	r := httprouter.New()
-	r.HandlerFunc("GET", "/plant_management", getAllPlants)
+	router := httprouter.New()
+	router.HandlerFunc("GET", "/plant_management", getAllPlants)
 
-	return r
+	return router
 }
 
 func getAllPlants(w http.ResponseWriter, r *http.Request) {

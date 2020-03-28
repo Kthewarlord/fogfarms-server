@@ -2,13 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d770124b-efb5-4882-b4d8-54ca8965e534" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/auth/jwt/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/auth/jwt/services.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/repository/postgres.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/services.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulegroup_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/modulegroup_management/services.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/handler/auth.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/handler/modulegroup_management/modulegroup_management.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/modulegroup_management/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/handler/plant_management/plant_management.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/plant_management/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/handler/user_management/user_management.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user_management/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulegroup_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/modulegroup_management/services.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plant_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/plant_management/services.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_management/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user_management/services.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -29,6 +59,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -49,11 +80,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/api/handler/modulegroup_management" />
-      <recent name="$PROJECT_DIR$/api/handler" />
-      <recent name="$PROJECT_DIR$/api" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/user" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/auth/jwt" />
+      <recent name="$PROJECT_DIR$/src/user_management" />
+      <recent name="$PROJECT_DIR$/src/plant_management" />
+      <recent name="$PROJECT_DIR$/src/modulegroup_management" />
     </key>
   </component>
   <component name="RunManager">
@@ -101,11 +132,16 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="115" key="#Go_Modules_(vgo)/0.0.1440.900@0.0.1440.900" timestamp="1584337227004" />
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585235425871">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="1580" y="-395" key="#SQL_Dialects" timestamp="1585406894641">
+      <screen x="1440" y="-1020" width="1080" height="1920" />
+    </state>
+    <state x="1580" y="-395" key="#SQL_Dialects/1440.-1020.1080.1920/0.0.1440.900@1440.-1020.1080.1920" timestamp="1585406894641" />
+    <state x="1578" y="-781" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585406964748">
+      <screen x="1440" y="-1020" width="1080" height="1920" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1584238822322" />
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235425871" />
+    <state x="1578" y="-781" key="#com.intellij.execution.impl.EditConfigurationsDialog/1440.-1020.1080.1920/0.0.1440.900@1440.-1020.1080.1920" timestamp="1585406964748" />
     <state x="408" y="193" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584330371064">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -138,5 +174,13 @@
     </state>
     <state width="1398" height="303" key="GridCell.Tab.0.right/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235444546" />
     <state width="1398" height="303" key="GridCell.Tab.0.right/1440.-997.1080.1897/0.0.1440.900@0.0.1440.900" timestamp="1585239286491" />
+    <state x="1785" y="-136" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585405236658">
+      <screen x="1440" y="-1020" width="1080" height="1920" />
+    </state>
+    <state x="1785" y="-136" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1440.-1020.1080.1920/0.0.1440.900@1440.-1020.1080.1920" timestamp="1585405236658" />
+    <state x="1645" y="-569" width="670" height="676" key="search.everywhere.popup" timestamp="1585407427038">
+      <screen x="1440" y="-1020" width="1080" height="1920" />
+    </state>
+    <state x="1645" y="-569" width="670" height="676" key="search.everywhere.popup/1440.-1020.1080.1920/0.0.1440.900@1440.-1020.1080.1920" timestamp="1585407427038" />
   </component>
 </project>

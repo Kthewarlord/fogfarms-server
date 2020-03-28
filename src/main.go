@@ -1,6 +1,7 @@
 package main
 
 import (
+	"../api/handler/auth/jwt"
 	"./handler/modulegroup_management"
 	"./handler/plant_management"
 	"./handler/user_management"
@@ -18,6 +19,9 @@ func main() {
 
 func run() error {
 	mux := http.NewServeMux()
+
+	jwtAuthHandler := jwt.MakeHTTPHandler()
+	mux.Handle("/auth", jwtAuthHandler)
 
 	moduleGroupManagementHandler := modulegroup_management.MakeHTTPHandler()
 	mux.Handle("/modulegroup_management", moduleGroupManagementHandler)

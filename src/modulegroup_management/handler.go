@@ -7,10 +7,10 @@ import (
 )
 
 func MakeHTTPHandler() http.Handler {
-	r := httprouter.New()
-	r.HandlerFunc("GET", "/modulegroup_management", getAllModuleGroup)
+	router := httprouter.New()
+	router.HandlerFunc("GET", "/modulegroup_management", getAllModuleGroup)
 
-	return r
+	return router
 }
 
 func getAllModuleGroup(w http.ResponseWriter, r *http.Request) {

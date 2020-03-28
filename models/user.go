@@ -4,10 +4,11 @@ import (
 	"time"
 )
 
-type Type string
+type Role string
 
 const (
-	Administrator Type = "Administrator"
+	Administrator Role = "Administrator"
+	AuthorizedUser Role = "AuthorizedUser"
 )
 
 type User struct {
@@ -15,6 +16,6 @@ type User struct {
 	Username  string    `json:"username"`
 	Salt      string    `json:"salt"`
 	Hash      string    `json:"hash"`
-	Type      Type      `json:"type"`
+	Role      Role      `json:"role"`
 	CreatedAt time.Time `json:"created_at"`
 }
