@@ -1,10 +1,10 @@
 package main
 
 import (
-	"./auth/jwt"
-	"./modulegroup_management"
-	"./plant_management"
-	"./user_management"
+	"github.com/KitaPDev/fogfarms-server/src/auth/jwt"
+	"github.com/KitaPDev/fogfarms-server/src/modulegroup_management"
+	"github.com/KitaPDev/fogfarms-server/src/plant_management"
+	"github.com/KitaPDev/fogfarms-server/src/user_management"
 	"github.com/labstack/gommon/log"
 	"net/http"
 	"os"

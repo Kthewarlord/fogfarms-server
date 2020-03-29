@@ -1,8 +1,8 @@
 package jwt
 
 import (
-	"../../user"
 	"fmt"
+	"github.com/KitaPDev/fogfarms-server/src/user"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/gommon/log"
 	"io"

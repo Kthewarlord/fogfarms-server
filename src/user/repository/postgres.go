@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"../../../models"
 	"database/sql"
 	"fmt"
+	"github.com/KitaPDev/fogfarms-server/models"
 	"time"
 )
 
