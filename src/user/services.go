@@ -3,6 +3,7 @@ package user
 import (
 	"../../models"
 	"./repository"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var registeredUsers []models.User
@@ -15,30 +16,38 @@ func GetAllUsers() []models.User {
 	return registeredUsers
 }
 
-func GetUser(username string) models.User {
-	
+func GetUser(username string) *models.User {
+	if exists, user := Exists(username); exists {
+		return user
+	}
 }
 
-func Exists(username string) bool {
+func Exists(username string) (bool, *models.User) {
 	for _, user := range registeredUsers {
 		if user.Username == username {
-			return true
+			return true, &user
 		}
 	}
-	return false
+	return false, nil
 }
 
 func ValidateUser(username string, password string) bool {
-	if Exists(username) {
-		for _, user := range registeredUsers {
-			if user.Username == username {
-
+	if exists, user := Exists(username); exists {
+		if user.Username == username {
+			if user.Hash == hash(password, user.Salt) {
+				return true
 			}
 		}
 	}
 	return false
 }
 
-func hash(username string, password string) string {
+func hash(password string, salt string) string {
+	s := password + salt
+	h, err := bcrypt.GenerateFromPassword([]byte(s), bcrypt.DefaultCost)
+	if err != nil {
+		panic(err)
+	}
 
+	return string(h)
 }

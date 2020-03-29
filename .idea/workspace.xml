@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/jwt/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/jwt/handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/jwt/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/jwt/services.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/repository/postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/repository/postgres.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/user/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/services.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,10 +129,11 @@
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1584238822322" />
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/1440.-1020.1080.1920/0.0.1440.900@0.0.1440.900" timestamp="1585235425871" />
     <state x="1578" y="-781" key="#com.intellij.execution.impl.EditConfigurationsDialog/1440.-1020.1080.1920/0.0.1440.900@1440.-1020.1080.1920" timestamp="1585406964748" />
-    <state x="408" y="193" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584330371064">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="1746" y="-608" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585486832414">
+      <screen x="1440" y="-1020" width="1080" height="1920" />
     </state>
     <state x="408" y="193" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1440.900@0.0.1440.900" timestamp="1584330371064" />
+    <state x="1746" y="-608" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1440.-1020.1080.1920/0.0.1440.900@1440.-1020.1080.1920" timestamp="1585486832414" />
     <state x="415" y="93" key="#go_build_fogfarms-server" timestamp="1585235439721">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

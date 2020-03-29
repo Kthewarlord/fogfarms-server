@@ -1,10 +1,10 @@
 package main
 
 import (
-	"../api/handler/auth/jwt"
-	"./handler/modulegroup_management"
-	"./handler/plant_management"
-	"./handler/user_management"
+	"./auth/jwt"
+	"./modulegroup_management"
+	"./plant_management"
+	"./user_management"
 	"github.com/labstack/gommon/log"
 	"net/http"
 	"os"
