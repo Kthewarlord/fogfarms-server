@@ -20,6 +20,8 @@ func GetUser(username string) *models.User {
 	if exists, user := Exists(username); exists {
 		return user
 	}
+
+	return nil
 }
 
 func Exists(username string) (bool, *models.User) {
