@@ -1,8 +1,8 @@
 package user
 
 import (
-	"../../models"
-	"./repository"
+	"github.com/KitaPDev/fogfarms-server/models"
+	"github.com/KitaPDev/fogfarms-server/src/user/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 
