@@ -1,8 +1,9 @@
-module github.com/KitaPDev/fogfarms-server
+module github.com/KitaPDev/fogfarms-server/tree/demoReturn
 
 go 1.14
 
 require (
+	github.com/KitaPDev/fogfarms-server v0.0.0-20200330045127-0092e58889bb
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/labstack/gommon v0.3.0

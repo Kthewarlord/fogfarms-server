@@ -3,11 +3,11 @@ package modulegroup_management
 import(
 	"fmt"
 	"net/http"
-	"github.com/KitaPDev/fogfarms-server/tree/demoReturn"
 	"encoding/json"
 )
 type Services interface {
-	getAllModuleGroup(w http.ResponseWriter, r *http.Request) {
+	getAllModuleGroup(w http.ResponseWriter, r *http.Request) 
+	getDemoJson(w http.ResponseWriter, r *http.Request)
 }
 
 func getAllModuleGroup(w http.ResponseWriter, r *http.Request) {
@@ -21,4 +21,12 @@ type DemoJson struct {
 
 func getDemoJson(w http.ResponseWriter, r *http.Request){
 	demoJson := DemoJson{"Name", []string{"item 1","item 2"}}
+	js, err := json.Marshal(demoJson)
+	if err != nil {
+	  http.Error(w, err.Error(), http.StatusInternalServerError)
+	  return
+	}
+  
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
 }
