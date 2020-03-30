@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-	"github.com/KitaPDev/fogfarms-server/models"
+	"github.com/ddfsdd/fogfarms-server/models"
 	"time"
 )
 

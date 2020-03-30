@@ -3,7 +3,7 @@ package modulegroup_management
 import(
 	"fmt"
 	"net/http"
-	"encoding/json"
+	//"encoding/json"
 )
 type Services interface {
 	getAllModuleGroup(w http.ResponseWriter, r *http.Request) 
@@ -22,13 +22,14 @@ func getAllModuleGroup(w http.ResponseWriter, r *http.Request) {
 
 
 func getDemoJson(w http.ResponseWriter, r *http.Request){
-	demoJson := DemoJson{"Name", []string{"item 1","item 2"}}
-	js, err := json.Marshal(demoJson)
-	if err != nil {
-	  http.Error(w, err.Error(), http.StatusInternalServerError)
-	  return
-	}
+	fmt.Fprint(w, "Hello World!")
+	// demoJson := DemoJson{"Name", []string{"item 1","item 2"}}
+	// js, err := json.Marshal(demoJson)
+	// if err != nil {
+	//   http.Error(w, err.Error(), http.StatusInternalServerError)
+	//   return
+	// }
   
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
+	// w.Header().Set("Content-Type", "application/json")
+	// w.Write(js)
 }

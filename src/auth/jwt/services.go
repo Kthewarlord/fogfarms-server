@@ -2,7 +2,7 @@ package jwt
 
 import (
 	"fmt"
-	"github.com/KitaPDev/fogfarms-server/src/user"
+	"github.com/ddfsdd/fogfarms-server/src/user"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/gommon/log"
 	"io"
