@@ -1,8 +1,8 @@
 package user
 
 import (
-	"github.com/ddfsdd/fogfarms-server/models"
-	"github.com/ddfsdd/fogfarms-server/src/user/repository"
+	"github.com/KitaPDev/fogfarms-server/models"
+	"github.com/KitaPDev/fogfarms-server/src/user/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 
