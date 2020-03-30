@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  backend:
+    image: ./Dockerfile
+    container_name: fogfarms-server
+    volumes:
+      - .:/server
+    command: sh -c 'cd /server && yarn && yarn start:dev'
+    ports:
+      - 9090:9090
+
+  postgresql:
+    image: postgres:11.5
+    container_name: fogfarms-postgresql
+    volumes:
+      - ./data/postgres:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: fogfarms
+      POSTGRES_PASSWORD: fogfarms
+    ports:
+      - 5432:5432

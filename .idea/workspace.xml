@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d770124b-efb5-4882-b4d8-54ca8965e534" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/user/services.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/services.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
