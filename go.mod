@@ -2,7 +2,7 @@ module github.com/ddfsdd/fogfarms-server
 
 go 1.14
 
-replace github.com/KitaPDev/fogfarms-server/modulegroup_management => github.com/ddfsdd/fogfarms-server/modulegroup_management v0.0.1
+replace github.com/KitaPDev/fogfarms-server/modulegroup_management => github.com/ddfsdd/fogfarms-server/tree/master/src/modulegroup_management v0.0.4
 
 require (
 	github.com/KitaPDev/fogfarms-server v0.0.4
