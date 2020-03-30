@@ -1,5 +1,5 @@
 module github.com/KitaPDev/fogfarms-server
-
+replace github.com/KitaPDev/fogfarms-server => github.com/ddfsdd/fogfarms-server v0.0.0
 go 1.14
 
 require (
