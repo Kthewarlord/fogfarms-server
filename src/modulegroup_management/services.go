@@ -1,29 +1,28 @@
 package modulegroup_management
 
-import(
+import (
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"encoding/json"
 )
 
 type DemoJson struct {
-	DemoName    string
+	DemoName  string
 	DemoArray []string
-  }
+}
 
 func getAllModuleGroup(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello World!")
 }
 
-
-func getDemoJson(w http.ResponseWriter, r *http.Request){
-	demoJson := DemoJson{"Name", []string{"item 1","item 2"}}
+func getDemoJson(w http.ResponseWriter, r *http.Request) {
+	demoJson := DemoJson{"Name", []string{"item 1", "item 2"}}
 	js, err := json.Marshal(demoJson)
 	if err != nil {
-	  http.Error(w, err.Error(), http.StatusInternalServerError)
-	  return
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-  
+
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
 }
