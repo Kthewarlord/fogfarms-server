@@ -4,6 +4,8 @@ github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/ddfsdd/fogfarms-server/src/modulegroup_management v0.0.0-20200331053301-d0e885fb5862 h1:41LS3lS+abUtpV/yF5S1pIIjpW5qNMSmCTpOAqqjgzQ=
 github.com/ddfsdd/fogfarms-server/src/modulegroup_management v0.0.0-20200331053301-d0e885fb5862/go.mod h1:pre8ifJ8Hk7FIkkbjMNXhWFo7dCPdkVM3ddqY1DCMLs=
+github.com/ddfsdd/fogfarms-server/src/modulegroup_management v0.0.0-20200331055930-806316bb79b6 h1:Udu+Iw7bciTEu/Eox1/xBUnmkO20wDO9MKbZnXPVQeM=
+github.com/ddfsdd/fogfarms-server/src/modulegroup_management v0.0.0-20200331055930-806316bb79b6/go.mod h1:6n3qZca468xJDy32ZWfeGONYmyVDLN8hPKrVMe//pzI=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/julienschmidt/httprouter v1.3.0 h1:U0609e9tgbseu3rBINet9P48AI/D3oJs4dN7jwJOQ1U=
