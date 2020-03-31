@@ -11,11 +11,11 @@ type DemoJson struct {
 	DemoArray []string
 }
 
-func getAllModuleGroup(w http.ResponseWriter, r *http.Request) {
+func GetAllModuleGroup(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello World!")
 }
 
-func getDemoJson(w http.ResponseWriter, r *http.Request) {
+func GetDemoJson(w http.ResponseWriter, r *http.Request) {
 	demoJson := DemoJson{"Name", []string{"item 1", "item 2"}}
 	js, err := json.Marshal(demoJson)
 	if err != nil {
