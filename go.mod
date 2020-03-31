@@ -2,10 +2,9 @@ module github.com/ddfsdd/fogfarms-server
 
 go 1.14
 
-replace github.com/KitaPDev/fogfarms-server/modulegroup_management => github.com/ddfsdd/fogfarms-server/tree/master/src/modulegroup_management v0.0.4
-
 require (
 	github.com/KitaPDev/fogfarms-server v0.0.4
+	github.com/ddfsdd/fogfarms-server/src/modulegroup_management v0.0.0-20200331053301-d0e885fb5862
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/labstack/gommon v0.3.0
