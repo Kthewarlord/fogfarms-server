@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+    postgresql:
+        image: postgres:11.5
+        volumes:
+            - ./data/postgres:/var/lib/postgresql
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: fogfarms-01
+        ports:
+            - 5432:5432
