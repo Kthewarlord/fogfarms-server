@@ -12,10 +12,6 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
-	router.HandleFunc("/dashboard/toggle_device", toggleDevice).
-		Methods("POST").
-		Schemes("http")
-
 	router.HandleFunc("/dashboard/toggle_auto", toggleAuto).
 		Methods("POST").
 		Schemes("http")
@@ -28,15 +24,15 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
+	router.HandleFunc("/dashboard/update_device_status", updateDeviceStatus).
+		Methods("POST").
+		Schemes("http")
+
 	return router
 }
 
 func populateDashboard(w http.ResponseWriter, r *http.Request) {
 	PopulateDashboard(w, r)
-}
-
-func toggleDevice(w http.ResponseWriter, r *http.Request) {
-	ToggleDevice(w, r)
 }
 
 func toggleAuto(w http.ResponseWriter, r *http.Request) {
@@ -49,4 +45,8 @@ func setEnvironmentParameters(w http.ResponseWriter, r *http.Request) {
 
 func resetTimer(w http.ResponseWriter, r *http.Request) {
 	ResetTimer(w, r)
+}
+
+func updateDeviceStatus(w http.ResponseWriter, r *http.Request) {
+	UpdateDeviceStatus(w, r)
 }

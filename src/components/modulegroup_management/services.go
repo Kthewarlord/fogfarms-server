@@ -2,6 +2,7 @@ package modulegroup_management
 
 import (
 	"encoding/json"
+	"github.com/KitaPDev/fogfarms-server/models"
 	"log"
 	"net/http"
 	"time"
@@ -267,4 +268,42 @@ func DeleteModuleGroup(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Successful"))
+}
+
+func getModuleGroupByMatchedLabel(w http.ResponseWriter, r *http.Request) {
+	if !jwt.AuthenticateUserToken(w, r) {
+		msg := "Unauthorized"
+		http.Error(w, msg, http.StatusUnauthorized)
+		return
+	}
+
+	type Input struct {
+		ModuleGroupLabel string `json:"module_group_label"`
+	}
+	var input Input
+	success := jsonhandler.DecodeJsonFromBody(w, r, &input)
+	if !success {
+		return
+	}
+
+	modulegroup, err := modulegroup.GetModuleGroupsByLabelMatch(input.ModuleGroupLabel)
+	if err != nil {
+		msg := "Error: Failed to Search For ModuleGroup"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+	type Output struct {
+		Data []models.ModuleGroup
+	}
+	out := Output{modulegroup}
+	jsonData, err := json.Marshal(out)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }

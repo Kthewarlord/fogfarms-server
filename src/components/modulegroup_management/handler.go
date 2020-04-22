@@ -20,6 +20,10 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
+	router.HandleFunc("/modulegroup_management/search", getModuleGroupByMatchedLabel).
+		Methods("POST").
+		Schemes("http")
+
 	router.HandleFunc("/modulegroup_management/edit_modulegroup_label", editModuleGroupLabel).
 		Methods("POST").
 		Schemes("http")

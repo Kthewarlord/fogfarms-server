@@ -217,3 +217,46 @@ func extractTokenFromAuthHeader(val string) (token string, ok bool) {
 func generateAuthHeaderFromToken(token string) string {
 	return bearerFormat + token
 }
+
+func ChangePassword(w http.ResponseWriter, r *http.Request) {
+	type Input struct {
+		Username    string `json:"username"`
+		Password    string `json:"password"`
+		NewPassword string `json:"new_password"`
+	}
+	if r.Header.Get("Content-Type") != "" {
+		value, _ := header.ParseValueAndParams(r.Header, "Content-Type")
+		if value != "application/json" {
+			msg := "Content-Type header is not application/json"
+			http.Error(w, msg, http.StatusUnsupportedMediaType)
+			return
+		}
+	}
+
+	var credentials Input
+
+	success := jsonhandler.DecodeJsonFromBody(w, r, &credentials)
+	if !success {
+		return
+	}
+	username := credentials.Username
+	password := credentials.Password
+	valid, err := user.AuthenticateByUsername(username, password)
+	if err != nil {
+		msg := "Error: Failed to Authenticate By UserID"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+	if !valid {
+		msg := "Error: Failed to Change password"
+		http.Error(w, msg, http.StatusUnauthorized)
+		return
+	}
+	err = user.ChangePassword(credentials.Username, credentials.NewPassword)
+	if err != nil {
+		msg := "Error: Failed to Change password"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+
+}

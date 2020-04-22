@@ -223,3 +223,19 @@ func hash(password string, salt string) (string, error) {
 
 	return string(h), nil
 }
+
+func ChangePassword(username string, newPassword string) error {
+	db := database.GetDB()
+	salt := generateSalt()
+	hash, err := hash(newPassword, salt)
+	sqlStatement :=
+		`UPDATE Users	
+			SET Hash=$1,Salt=$2
+			WHERE Username = $3`
+	_, err = db.Query(sqlStatement, hash, salt, username)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

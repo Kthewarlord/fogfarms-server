@@ -89,3 +89,22 @@ func GetLatestSensorData(moduleGroupID int) (map[string]*outputs.Dashboardoutput
 	}
 	return dashboard, nil
 }
+
+func RecordSensorData(moduleID int, tds []float64, ph []float64, solutionTemperature []float64,
+	lux []float64, humidity []float64, temperature []float64) error {
+
+	db := database.GetDB()
+
+	sqlStatement :=
+		`INSERT INTO SensorData (moduleid, arrnutrientunittds, arrnutrientunitph, arrnutrientunitsolutiontemperature, arrgrowunitlux, arrgrowunithumidity, arrgrowunittemperature)
+		VALUES ($1, $2, $3, $4, $5, $6, $7)`
+
+	_, err := db.Query(sqlStatement, moduleID, pq.Array(tds), pq.Array(ph), pq.Array(solutionTemperature),
+		pq.Array(lux), pq.Array(humidity), pq.Array(temperature))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

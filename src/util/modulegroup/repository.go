@@ -17,4 +17,5 @@ type Repository interface {
 	EditModuleGroupLabel(moduleGroupID int, moduleGroupLabel string) error
 	ChangePlant(moduleGroupID int, PlantID int) error
 	ResetTimer(moduleGroupID int) error
+	GetOnAutoByModuleID(moduleID int) (bool, error)
 }

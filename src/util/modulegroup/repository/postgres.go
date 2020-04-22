@@ -2,6 +2,7 @@ package repository
 
 import (
 	"log"
+	"strings"
 
 	"github.com/KitaPDev/fogfarms-server/models"
 	"github.com/KitaPDev/fogfarms-server/src/database"
@@ -219,4 +220,73 @@ func ResetTimer(moduleGroupID int) error {
 	_, err := db.Query(sqlStatement, moduleGroupID)
 
 	return err
+}
+
+func GetOnAutoByModuleID(moduleID int) (bool, error) {
+	db := database.GetDB()
+
+	sqlStatement :=
+		`SELECT onAuto FROM ModuleGroup
+		WHERE ModuleGroupID = (SELECT ModuleGroupID FROM Module WHERE ModuleID = $1)`
+
+	rows, err := db.Query(sqlStatement, moduleID)
+	if err != nil {
+		return false, err
+	}
+
+	var onAuto bool
+	for rows.Next() {
+		err = rows.Scan(&onAuto)
+
+		if err != nil {
+			return false, nil
+		}
+	}
+
+	return onAuto, nil
+}
+
+func GetModuleGroupsByLabelMatch(moduleGroupLabel string) ([]models.ModuleGroup, error) {
+	var moduleGroups []models.ModuleGroup
+	var err error
+
+	sqlStatement :=
+		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID, locationid,Param_TDs, Param_PH, 
+		Param_Humidity, onauto,LightsOnHour, LightsOffHour, TimerLastReset
+		FROM ModuleGroup WHERE Lower(ModuleGroupLabel) LIKE $1||'%' ;`
+	db := database.GetDB()
+	rows, err := db.Query(sqlStatement, strings.ToLower(moduleGroupLabel))
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	for rows.Next() {
+		moduleGroup := models.ModuleGroup{}
+
+		err := rows.Scan(
+			&moduleGroup.ModuleGroupID,
+			&moduleGroup.ModuleGroupLabel,
+			&moduleGroup.PlantID,
+			&moduleGroup.LocationID,
+			&moduleGroup.TDS,
+			&moduleGroup.PH,
+			&moduleGroup.Humidity,
+			&moduleGroup.OnAuto,
+			&moduleGroup.LightsOnHour,
+			&moduleGroup.LightsOffHour,
+			&moduleGroup.TimerLastReset,
+		)
+		if err != nil {
+			log.Println(err)
+			return nil, err
+
+		}
+
+		moduleGroups = append(moduleGroups, moduleGroup)
+	}
+
+	log.Println("Variable moduleGroups in GetModuleGroups by ID", moduleGroups)
+
+	return moduleGroups, err
 }

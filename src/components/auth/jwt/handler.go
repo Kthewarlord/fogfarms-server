@@ -20,6 +20,9 @@ func MakeHTTPHandler() http.Handler {
 	router.HandleFunc("/auth/sign_out", SignOut).
 		Methods("GET").
 		Schemes("http")
+	router.HandleFunc("/auth/change_password", ChangePassword).
+		Methods("POST").
+		Schemes("http")
 	return router
 }
 

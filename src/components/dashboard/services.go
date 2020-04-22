@@ -2,12 +2,12 @@ package dashboard
 
 import (
 	"encoding/json"
+	"github.com/KitaPDev/fogfarms-server/src/util/module"
 	"log"
 	"net/http"
 
 	"github.com/KitaPDev/fogfarms-server/src/components/auth/jwt"
 	"github.com/KitaPDev/fogfarms-server/src/jsonhandler"
-	"github.com/KitaPDev/fogfarms-server/src/util/device"
 	"github.com/KitaPDev/fogfarms-server/src/util/modulegroup"
 	"github.com/KitaPDev/fogfarms-server/src/util/sensordata"
 )
@@ -45,34 +45,6 @@ func PopulateDashboard(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonData)
-}
-
-func ToggleDevice(w http.ResponseWriter, r *http.Request) {
-	if !jwt.AuthenticateUserToken(w, r) {
-		return
-	}
-	type Input struct {
-		ModuleID    int    `json:"module_id"`
-		DeviceArray []bool `json:"bool"`
-		Type        string `json:"type"`
-	}
-	var input Input
-
-	success := jsonhandler.DecodeJsonFromBody(w, r, &input)
-	if !success {
-		return
-	}
-
-	err := device.ToggleDevice(input.ModuleID, input.DeviceArray, input.Type)
-	if err != nil {
-		msg := "Error: Failed to Toggle Device"
-		http.Error(w, msg, http.StatusInternalServerError)
-		log.Println(err)
-		return
-	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Successful"))
 }
 
 func ToggleAuto(w http.ResponseWriter, r *http.Request) {
@@ -140,6 +112,7 @@ func ResetTimer(w http.ResponseWriter, r *http.Request) {
 	if !jwt.AuthenticateUserToken(w, r) {
 		return
 	}
+
 	type Input struct {
 		ModuleGroupID int `json:"module_group_id"`
 	}
@@ -155,6 +128,49 @@ func ResetTimer(w http.ResponseWriter, r *http.Request) {
 		msg := "Error: Failed to Reset Timer"
 		http.Error(w, msg, http.StatusInternalServerError)
 		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Successful"))
+}
+
+func UpdateDeviceStatus(w http.ResponseWriter, r *http.Request) {
+	if !jwt.AuthenticateUserToken(w, r) {
+		return
+	}
+
+	type Input struct {
+		ModuleID       int    `json:"module_id"`
+		Foggers        []bool `json:"foggers"`
+		LEDs           []bool `json:"leds"`
+		Mixers         []bool `json:"mixers"`
+		SolenoidValves []bool `json:"solenoid_valves"`
+	}
+	var input Input
+
+	success := jsonhandler.DecodeJsonFromBody(w, r, &input)
+	if !success {
+		return
+	}
+
+	onAuto, err := modulegroup.GetOnAutoByModuleID(input.ModuleID)
+	if err != nil {
+		msg := "Error: Failed to Get OnAuto By ModuleID"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+
+	if !onAuto {
+		err = module.UpdateDeviceStatus(input.ModuleID, input.Mixers, input.SolenoidValves, input.LEDs, input.Foggers)
+		if err != nil {
+			msg := "Error: Failed to Update Device Status"
+			http.Error(w, msg, http.StatusInternalServerError)
+			return
+		}
+
+	} else {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Failed"))
 	}
 
 	w.WriteHeader(http.StatusOK)
