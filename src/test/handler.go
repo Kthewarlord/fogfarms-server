@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/KitaPDev/fogfarms-server/src/jsonhandler"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/golang/gddo/httputil/header"
 	"github.com/julienschmidt/httprouter"
@@ -19,7 +20,7 @@ func MakeHTTPHandler() http.Handler {
 	router.HandlerFunc("POST", "/test/login", testLogin)
 	router.HandlerFunc("POST", "/test/post", PostTestName)
 	router.HandlerFunc("GET", "/test/js", GetDemoJson)
-
+	router.HandlerFunc("POST", "/test/arduinoInput", testArduinoInput)
 	return router
 }
 
@@ -120,4 +121,58 @@ func GenerateToken(username string, w http.ResponseWriter) {
 		Value:   tokenString,
 		Expires: expirationTime,
 	})
+}
+
+func testArduinoInput(w http.ResponseWriter, r *http.Request) {
+	type Input struct {
+		Token          string               `json:"token"`
+		SensorData     map[string][]float64 `json:"sensor_data"`
+		Mixers         []bool               `json:"mixers"`
+		SolenoidValves []bool               `json:"solenoid_valves"`
+		LEDs           []bool               `json:"leds"`
+		Foggers        []bool               `json:"foggers"`
+	}
+
+	input := Input{}
+	success := jsonhandler.DecodeJsonFromBody(w, r, &input)
+	if !success {
+		return
+	}
+	tds := input.SensorData["tds"]
+	ph := input.SensorData["ph"]
+	solutionTemp := input.SensorData["solution_temp"]
+	lux := input.SensorData["grow_unit_lux"]
+	humidity := input.SensorData["grow_unit_humidity"]
+	temperature := input.SensorData["grow_unit_temp"]
+	type InputExtracted struct {
+		Input                 Input
+		AcceptedNTDS          []float64
+		AcceptedNPH           []float64
+		AcceptedNSolutionTemo []float64
+		AcceptedGLux          []float64
+		AcceptedGHumidity     []float64
+		AcceptedGTemperature  []float64
+	}
+
+	output := InputExtracted{
+		Input:        input,
+		AcceptedNTDS: tds, AcceptedNPH: ph,
+		AcceptedNSolutionTemo: solutionTemp,
+		AcceptedGLux:          lux,
+		AcceptedGHumidity:     humidity,
+		AcceptedGTemperature:  temperature,
+	}
+
+	jsonData, err := json.Marshal(output)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
+
 }
