@@ -45,7 +45,7 @@ func run() error {
 	router.PathPrefix("/test").Handler(testHanlder)
 	//router.Use(mux.CORSMethodMiddleware(router))
 	handler := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000", "https://25.22.245.97:3000"},
+		AllowedOrigins:   []string{"http://localhost:3000", "https://localhost:3000", "https://25.22.245.97:3000"},
 		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete},
 		AllowCredentials: true,
 		AllowedHeaders:   []string{"*"},
