@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/rs/cors"
 )
 
 func MakeHTTPHandler() http.Handler {
@@ -28,13 +27,8 @@ func MakeHTTPHandler() http.Handler {
 	router.HandleFunc("/dashboard/update_device_status", updateDeviceStatus).
 		Methods("POST").
 		Schemes("http")
-	ahandler := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000", "https://localhost:3000", "https://25.22.245.97:3000"},
-		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete},
-		AllowCredentials: true,
-		AllowedHeaders:   []string{"*"},
-	}).Handler(router)
-	return ahandler
+
+	return router
 }
 
 func populateDashboard(w http.ResponseWriter, r *http.Request) {
