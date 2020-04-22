@@ -39,8 +39,14 @@ func run() error {
 	router.PathPrefix("/plant_management").Handler(plantManagementHandler)
 
 	dashBoardHandler := dashboard.MakeHTTPHandler()
-	router.PathPrefix("/dashboard").Handler(dashBoardHandler)
 
+	ahandler := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:3000", "https://localhost:3000", "https://25.22.245.97:3000"},
+		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete},
+		AllowCredentials: true,
+		AllowedHeaders:   []string{"*"},
+	}).Handler(dashBoardHandler)
+	router.PathPrefix("/dashboard").Handler(ahandler)
 	testHanlder := test.MakeHTTPHandler()
 	router.PathPrefix("/test").Handler(testHanlder)
 	//router.Use(mux.CORSMethodMiddleware(router))
