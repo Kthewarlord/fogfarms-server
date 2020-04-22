@@ -21,6 +21,9 @@ func MakeHTTPHandler() http.Handler {
 	router.HandlerFunc("POST", "/test/post", PostTestName)
 	router.HandlerFunc("GET", "/test/js", GetDemoJson)
 	router.HandlerFunc("POST", "/test/arduinoInput", testArduinoInput)
+	router.HandlerFunc("GET", "/test/arduinoOutputT", arduinoOutputTrue)
+	router.HandlerFunc("GET", "/test/arduinoOutputF", arduinoOutputFalse)
+
 	return router
 }
 
@@ -175,4 +178,55 @@ func testArduinoInput(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonData)
 
+}
+func arduinoOutputTrue(w http.ResponseWriter, r *http.Request) {
+	type Output struct {
+		OnAuto bool `json:"on_auto"`
+	}
+
+	output := Output{
+		OnAuto: true,
+	}
+
+	jsonData, err := json.Marshal(output)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
+}
+
+func arduinoOutputFalse(w http.ResponseWriter, r *http.Request) {
+	type Output struct {
+		OnAuto         bool   `json:"on_auto"`
+		Foggers        []bool `json:"foggers"`
+		LEDs           []bool `json:"leds"`
+		Mixers         []bool `json:"mixers"`
+		SolenoidValves []bool `json:"solenoid_valves"`
+	}
+
+	output := Output{
+		OnAuto:         false,
+		Foggers:        []bool{false},
+		LEDs:           []bool{false},
+		Mixers:         []bool{false},
+		SolenoidValves: []bool{false, false},
+	}
+
+	jsonData, err := json.Marshal(output)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }
