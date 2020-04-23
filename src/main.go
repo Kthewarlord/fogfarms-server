@@ -40,13 +40,7 @@ func run() error {
 
 	dashBoardHandler := dashboard.MakeHTTPHandler()
 
-	ahandler := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000", "https://localhost:3000", "https://25.22.245.97:3000"},
-		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete},
-		AllowCredentials: true,
-		AllowedHeaders:   []string{"*"},
-	}).Handler(dashBoardHandler)
-	router.PathPrefix("/dashboard").Handler(ahandler)
+	router.PathPrefix("/dashboard").Handler(dashBoardHandler)
 	testHanlder := test.MakeHTTPHandler()
 	router.PathPrefix("/test").Handler(testHanlder)
 	//router.Use(mux.CORSMethodMiddleware(router))
