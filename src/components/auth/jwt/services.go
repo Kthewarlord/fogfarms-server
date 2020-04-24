@@ -192,7 +192,9 @@ func GenerateToken(username string, w http.ResponseWriter) error {
 		Path:    "/",
 	}
 	http.SetCookie(w, cookie)
-
+	cs := w.Header().Get("Set-Cookie")
+	cs += "; SameSite=None"
+	w.Header().Set("Set-Cookie", cs)
 	return nil
 }
 
