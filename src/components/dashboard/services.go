@@ -2,9 +2,10 @@ package dashboard
 
 import (
 	"encoding/json"
-	"github.com/KitaPDev/fogfarms-server/src/util/module"
 	"log"
 	"net/http"
+
+	"github.com/KitaPDev/fogfarms-server/src/util/module"
 
 	"github.com/KitaPDev/fogfarms-server/src/components/auth/jwt"
 	"github.com/KitaPDev/fogfarms-server/src/jsonhandler"
@@ -171,6 +172,7 @@ func UpdateDeviceStatus(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Failed"))
+		return
 	}
 
 	w.WriteHeader(http.StatusOK)
