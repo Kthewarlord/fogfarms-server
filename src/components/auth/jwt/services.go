@@ -193,7 +193,7 @@ func GenerateToken(username string, w http.ResponseWriter) error {
 	}
 	http.SetCookie(w, cookie)
 	cs := w.Header().Get("Set-Cookie")
-	cs += "; SameSite=None; secure"
+	cs += "; SameSite=None; Secure;"
 	w.Header().Set("Set-Cookie", cs)
 	return nil
 }
