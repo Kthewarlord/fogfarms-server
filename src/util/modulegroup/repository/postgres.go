@@ -98,6 +98,7 @@ func GetModuleGroupsByIDs(moduleGroupIDs []int) ([]models.ModuleGroup, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	for rows.Next() {
 		moduleGroup := models.ModuleGroup{}
@@ -135,7 +136,7 @@ func CreateModuleGroup(label string, plantID int, locationID int, tds float64, p
 		`INSERT INTO ModuleGroup (ModuleGroupLabel, PlantID, LocationID, onAuto,
 		 Param_TDS, Param_Ph, Param_Humidity, LightsOnHour, LightsOffHour, TimerLastReset)
 		 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, Now())`
-	_, err := db.Query(sqlStatement, label, plantID, locationID, onAuto, tds, ph, humidity,
+	_, err := db.Exec(sqlStatement, label, plantID, locationID, onAuto, tds, ph, humidity,
 		lightsOn, lightsOff)
 	if err != nil {
 		return err
@@ -148,7 +149,7 @@ func ToggleAuto(moduleGroupID int) error {
 	db := database.GetDB()
 
 	sqlStatement := `UPDATE ModuleGroup SET OnAuto = NOT OnAuto WHERE ModuleGroupID = $1`
-	_, err := db.Query(sqlStatement, moduleGroupID)
+	_, err := db.Exec(sqlStatement, moduleGroupID)
 	if err != nil {
 		return err
 	}
@@ -165,7 +166,7 @@ func SetEnvironmentParameters(moduleGroupID int, humidity float64, ph float64, t
 			SET Param_Humidity = $1, Param_PH = $2, Param_TDS = $3, LightsOnHour = $4, 
 				LightsOffHour = $5
 			WHERE ModuleGroupID = $6`
-	_, err := db.Query(sqlStatement, humidity, ph, tds, lightsOffHour, lightsOnHour, moduleGroupID)
+	_, err := db.Exec(sqlStatement, humidity, ph, tds, lightsOffHour, lightsOnHour, moduleGroupID)
 	if err != nil {
 		return err
 	}
@@ -178,7 +179,7 @@ func EditModuleGroupLabel(moduleGroupID int, moduleGroupLabel string) error {
 
 	sqlStatement := `UPDATE ModuleGroup SET ModuleGroupLabel = $1 WHERE ModuleGroupID = $2`
 
-	_, err := db.Query(sqlStatement, moduleGroupLabel, moduleGroupID)
+	_, err := db.Exec(sqlStatement, moduleGroupLabel, moduleGroupID)
 	if err != nil {
 		return err
 	}
@@ -191,7 +192,7 @@ func DeleteModuleGroup(moduleGroupID int) error {
 
 	sqlStatement := `DELETE FROM ModuleGroup WHERE ModuleGroupID = $1`
 
-	_, err := db.Query(sqlStatement, moduleGroupID)
+	_, err := db.Exec(sqlStatement, moduleGroupID)
 	if err != nil {
 		return err
 	}
@@ -204,7 +205,7 @@ func ChangePlant(moduleGroupID int, plantID int) error {
 
 	sqlStatement := `UPDATE ModuleGroup SET PlantID = $1 WHERE ModuleGroupID = $2`
 
-	_, err := db.Query(sqlStatement, plantID, moduleGroupID)
+	_, err := db.Exec(sqlStatement, plantID, moduleGroupID)
 	if err != nil {
 		return err
 	}
@@ -305,6 +306,7 @@ func GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel string, userID int) (
 		log.Println(err)
 		return nil, err
 	}
+	defer rows.Close()
 
 	for rows.Next() {
 		moduleGroup := models.ModuleGroup{}

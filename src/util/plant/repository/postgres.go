@@ -74,7 +74,7 @@ func NewPlant(name string, tds float64, ph float64, lux float64, lightsOnHour fl
 
 	sqlStatement := `INSERT INTO Plant (Name, TDS, PH, Lux, LightsOnHour, LightsOffHour)
 		VALUES ($1, $2, $3, $4, $5, $6)`
-	_, err := db.Query(sqlStatement, name, tds, ph, lux, lightsOnHour, lightsOffHour)
+	_, err := db.Exec(sqlStatement, name, tds, ph, lux, lightsOnHour, lightsOffHour)
 	if err != nil {
 		return err
 	}
@@ -85,7 +85,7 @@ func DeletePlant(plantID int) error {
 	db := database.GetDB()
 
 	sqlStatement := `DELETE FROM Plant WHERE PlantID = $1`
-	_, err := db.Query(sqlStatement, plantID)
+	_, err := db.Exec(sqlStatement, plantID)
 	if err != nil {
 		return err
 	}
@@ -99,7 +99,7 @@ func EditPlant(p *models.Plant) error {
 		`UPDATE PLANT
 		SET Name = $1, TDS = $2, PH = $3, Lux = $4, LightsOnHour = $5, LightsOffHour = $6
 		WHERE PlantID = $7`
-	_, err := db.Query(sqlStatement, p.Name, p.TDS, p.PH, p.Lux, p.LightsOnHour,p.LightsOffHour,
+	_, err := db.Exec(sqlStatement, p.Name, p.TDS, p.PH, p.Lux, p.LightsOnHour, p.LightsOffHour,
 		p.PlantID)
 	if err != nil {
 		return err

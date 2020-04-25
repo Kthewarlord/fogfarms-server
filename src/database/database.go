@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 
@@ -63,6 +64,7 @@ func GetDB() *sql.DB {
 		if err != nil {
 			panic(err)
 		}
+		log.Println("a new conn open")
 	}
 
 	return db

@@ -149,7 +149,7 @@ func RecordSensorData(moduleID int, tds []float64, ph []float64, solutionTempera
 		`INSERT INTO SensorData (moduleid, arrnutrientunittds, arrnutrientunitph, arrnutrientunitsolutiontemperature, arrgrowunitlux, arrgrowunithumidity, arrgrowunittemperature)
 		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
-	_, err := db.Query(sqlStatement, moduleID, pq.Array(tds), pq.Array(ph), pq.Array(solutionTemperature),
+	_, err := db.Exec(sqlStatement, moduleID, pq.Array(tds), pq.Array(ph), pq.Array(solutionTemperature),
 		pq.Array(lux), pq.Array(humidity), pq.Array(temperature))
 
 	if err != nil {

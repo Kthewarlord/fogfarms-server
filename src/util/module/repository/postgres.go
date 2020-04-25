@@ -19,7 +19,7 @@ func CreateModule(moduleLabel string) error {
 		`INSERT INTO Module (ModuleLabel, Token, ArrFogger, ArrLED, ArrMixer, ArrSolenoidValve)
 		VALUES ($1, $2, $3, $4, $5, $6)`
 
-	_, err := db.Query(sqlStatement, moduleLabel, GenerateToken(), pq.BoolArray{}, pq.BoolArray{},
+	_, err := db.Exec(sqlStatement, moduleLabel, GenerateToken(), pq.BoolArray{}, pq.BoolArray{},
 		pq.BoolArray{}, pq.BoolArray{})
 	if err != nil {
 		return err
@@ -85,7 +85,7 @@ func AssignModulesToModuleGroup(moduleGroupID int, moduleIDs []int) error {
 
 	sqlStatement := `UPDATE Module SET ModuleGroupID = $1 WHERE ModuleID = ANY($2)`
 
-	_, err := db.Query(sqlStatement, moduleGroupID, pq.Array(moduleIDs))
+	_, err := db.Exec(sqlStatement, moduleGroupID, pq.Array(moduleIDs))
 
 	return err
 }
@@ -95,7 +95,7 @@ func DeleteModule(moduleLabel string) error {
 
 	sqlStatement := `DELETE FROM Module WHERE ModuleLabel = $1;`
 
-	_, err := db.Query(sqlStatement, moduleLabel)
+	_, err := db.Exec(sqlStatement, moduleLabel)
 	if err != nil {
 		return err
 	}
@@ -108,7 +108,7 @@ func EditModuleLabel(moduleID int, moduleLabel string) error {
 
 	sqlStatement := `UPDATE Module SET ModuleLabel = $1 WHERE ModuleID = $2`
 
-	_, err := db.Query(sqlStatement, moduleLabel, moduleID)
+	_, err := db.Exec(sqlStatement, moduleLabel, moduleID)
 	if err != nil {
 		return err
 	}
@@ -126,6 +126,7 @@ func GetModuleIDByToken(token string) (int, error) {
 	if err != nil {
 		return -1, err
 	}
+	defer rows.Close()
 
 	var moduleID int
 	for rows.Next() {
@@ -161,6 +162,7 @@ func GetDeviceStatus(moduleID int) ([]bool, []bool, []bool, []bool, error) {
 	if err != nil {
 		return nil, nil, nil, nil, err
 	}
+	defer rows.Close()
 
 	var fogger, led, mixer, solenoidValve []bool
 	for rows.Next() {
@@ -186,7 +188,7 @@ func UpdateDeviceStatus(moduleID int, mixer []bool, solenoidValves []bool, led [
 		`UPDATE Module SET ArrMixer = $1, ArrSolenoidValve = $2, ArrLED = $3, ArrFogger = $4
 		WHERE ModuleID = $5;`
 
-	_, err := db.Query(sqlStatement, pq.Array(mixer), pq.Array(solenoidValves), pq.Array(led),
+	_, err := db.Exec(sqlStatement, pq.Array(mixer), pq.Array(solenoidValves), pq.Array(led),
 		pq.Array(fogger), moduleID)
 	if err != nil {
 		return err

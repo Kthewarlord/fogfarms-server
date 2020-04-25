@@ -66,13 +66,13 @@ func AssignUserModuleGroupPermission(username string, moduleGroupLabel string, l
 				END;
 			$$ LANGUAGE plpgsql;`
 
-	_, err := db.Query(sqlStatement)
+	_, err := db.Exec(sqlStatement)
 	if err != nil {
 		log.Println(err)
 		return err
 	}
 
-	_, err = db.Query(`SELECT alterPermission($1, $2, $3)`, username, moduleGroupLabel, level)
+	_, err = db.Exec(`SELECT alterPermission($1, $2, $3)`, username, moduleGroupLabel, level)
 	if err != nil {
 		log.Println(err)
 		return err

@@ -232,7 +232,7 @@ func ChangePassword(username string, newPassword string) error {
 		`UPDATE Users	
 			SET Hash=$1,Salt=$2
 			WHERE Username = $3`
-	_, err = db.Query(sqlStatement, hash, salt, username)
+	_, err = db.Exec(sqlStatement, hash, salt, username)
 	if err != nil {
 		return err
 	}
@@ -245,7 +245,7 @@ func DeleteUserByUsername(username string) error {
 
 	sqlStatement := `DELETE FROM Users WHERE Username = $1`
 
-	_, err := db.Query(sqlStatement, username)
+	_, err := db.Exec(sqlStatement, username)
 
 	return err
 }
