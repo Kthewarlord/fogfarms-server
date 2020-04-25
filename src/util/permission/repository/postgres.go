@@ -57,7 +57,7 @@ func AssignUserModuleGroupPermission(username string, moduleGroupLabel string, l
 								AND modulegrouplabel = modulegrouplabelI
 								AND username = usernameI;
 						ELSE
-							INSERT INTO Permission (PermissionLevel, UserID, ModuleGroupID)
+							INSERT INTO Permission (UserID, ModuleGroupID,PermissionLevel)
 							SELECT userID,modulegroupID,levelI
 							FROM users, Modulegroup
 							Where modulegrouplabel=ModulegrouplabelI
