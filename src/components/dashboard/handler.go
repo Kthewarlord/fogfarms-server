@@ -28,6 +28,10 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
+	router.HandleFunc("/dashboard/history", history).
+		Methods("POST").
+		Schemes("http")
+
 	return router
 }
 
@@ -49,4 +53,8 @@ func resetTimer(w http.ResponseWriter, r *http.Request) {
 
 func updateDeviceStatus(w http.ResponseWriter, r *http.Request) {
 	UpdateDeviceStatus(w, r)
+}
+
+func history(w http.ResponseWriter, r *http.Request) {
+	GetSensorDataHistory(w, r)
 }

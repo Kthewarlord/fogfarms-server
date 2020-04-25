@@ -2,6 +2,7 @@ package repository
 
 import (
 	"log"
+	"time"
 
 	"github.com/KitaPDev/fogfarms-server/models"
 	"github.com/KitaPDev/fogfarms-server/models/outputs"
@@ -90,6 +91,55 @@ func GetLatestSensorData(moduleGroupID int) (map[string]*outputs.Dashboardoutput
 	return dashboard, nil
 }
 
+func GetSensorDataHistory(moduleGroupID int, timeBegin time.Time, timeEnd time.Time) (map[string][]models.SensorData, error) {
+	modules, err := module.GetModulesByModuleGroupIDs([]int{moduleGroupID})
+	if err != nil {
+		return nil, err
+	}
+	var moduleIDs []int
+	for _, m := range modules {
+		moduleIDs = append(moduleIDs, m.ModuleID)
+	}
+
+	db := database.GetDB()
+
+	sqlStatement :=
+		`SELECT Module.ModuleLabel, SensorData.Timestamp, SensorData.ArrNutrientUnitTDS, SensorData.ArrNutrientUnitPH, SensorData.ArrNutrientUnitSolutionTemperature, SensorData.ArrGrowUnitLux, SensorData.ArrGrowUnitHumidity, SensorData.ArrGrowUnitTemperature
+		FROM Module, SensorData
+		WHERE SensorData.Timestamp >= $1
+		  AND SensorData.Timestamp <= $2
+		  AND SensorData.ModuleID = ANY($3);`
+
+	rows, err := db.Query(sqlStatement, timeBegin, timeEnd, pq.Array(moduleIDs))
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	mapModuleLabelSensorData := make(map[string][]models.SensorData)
+	for rows.Next() {
+		var moduleLabel string
+		var sd models.SensorData
+
+		err = rows.Scan(
+			&moduleLabel,
+			&sd.TimeStamp,
+			pq.Array(&sd.TDS),
+			pq.Array(&sd.PH),
+			pq.Array(&sd.SolutionTemperature),
+			pq.Array(&sd.GrowUnitLux),
+			pq.Array(&sd.GrowUnitHumidity),
+			pq.Array(&sd.GrowUnitTemperature),
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		mapModuleLabelSensorData[moduleLabel] = append(mapModuleLabelSensorData[moduleLabel], sd)
+	}
+
+	return mapModuleLabelSensorData, nil
+}
 func RecordSensorData(moduleID int, tds []float64, ph []float64, solutionTemperature []float64,
 	lux []float64, humidity []float64, temperature []float64) error {
 
