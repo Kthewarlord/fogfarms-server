@@ -20,7 +20,7 @@ func CreateModule(moduleLabel string) error {
 		VALUES ($1, $2, $3, $4, $5, $6)`
 
 	_, err := db.Query(sqlStatement, moduleLabel, GenerateToken(), pq.BoolArray{}, pq.BoolArray{},
-				pq.BoolArray{}, pq.BoolArray{})
+		pq.BoolArray{}, pq.BoolArray{})
 	if err != nil {
 		return err
 	}
@@ -88,6 +88,32 @@ func AssignModulesToModuleGroup(moduleGroupID int, moduleIDs []int) error {
 	_, err := db.Query(sqlStatement, moduleGroupID, pq.Array(moduleIDs))
 
 	return err
+}
+
+func DeleteModule(moduleLabel string) error {
+	db := database.GetDB()
+
+	sqlStatement := `DELETE FROM Module WHERE ModuleLabel = $1;`
+
+	_, err := db.Query(sqlStatement, moduleLabel)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func EditModuleLabel(moduleID int, moduleLabel string) error {
+	db := database.GetDB()
+
+	sqlStatement := `UPDATE Module SET ModuleLabel = $1 WHERE ModuleID = $2`
+
+	_, err := db.Query(sqlStatement, moduleLabel, moduleID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func GetModuleIDByToken(token string) (int, error) {

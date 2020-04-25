@@ -36,6 +36,18 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
+	router.HandleFunc("/modulegroup_management/create_module", createModule).
+		Methods("POST").
+		Schemes("http")
+
+	router.HandleFunc("/modulegroup_management/delete_module", deleteModule).
+		Methods("POST").
+		Schemes("http")
+
+	router.HandleFunc("/modulegroup_management/edit_module_label", editModuleLabel).
+		Methods("POST").
+		Schemes("http")
+
 	return router
 }
 
@@ -61,4 +73,16 @@ func changePlant(w http.ResponseWriter, r *http.Request) {
 
 func deleteModuleGroup(w http.ResponseWriter, r *http.Request) {
 	DeleteModuleGroup(w, r)
+}
+
+func createModule(w http.ResponseWriter, r *http.Request) {
+	CreateModule(w, r)
+}
+
+func deleteModule(w http.ResponseWriter, r *http.Request) {
+	DeleteModule(w, r)
+}
+
+func editModuleLabel(w http.ResponseWriter, r *http.Request) {
+	EditModuleLabel(w, r)
 }
