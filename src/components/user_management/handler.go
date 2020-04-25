@@ -16,7 +16,7 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
-	router.HandleFunc("/user_management/assign/", assignUserModuleGroupPermission).
+	router.HandleFunc("/user_management/assign", assignUserModuleGroupPermission).
 		Methods("POST").
 		Schemes("http")
 
