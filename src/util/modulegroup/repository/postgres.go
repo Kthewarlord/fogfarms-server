@@ -298,7 +298,7 @@ func GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel string, userID int) (
 	sqlStatement :=
 		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID, locationid,Param_TDs, Param_PH, 
 		Param_Humidity, onauto,LightsOnHour, LightsOffHour, TimerLastReset
-		FROM ModuleGroup WHERE Lower(ModuleGroupLabel) LIKE $1||'%' AND IN (SELECT modulegroupid from permission where userid=$2);`
+		FROM ModuleGroup WHERE Lower(ModuleGroupLabel) LIKE $1||'%' AND modulegroupid IN (SELECT modulegroupid from permission where userid=$2);`
 	db := database.GetDB()
 	rows, err := db.Query(sqlStatement, strings.ToLower(moduleGroupLabel), userID)
 	if err != nil {
