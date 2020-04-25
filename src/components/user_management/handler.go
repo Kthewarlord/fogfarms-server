@@ -20,6 +20,10 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
+	router.HandleFunc("/user_management/delete", deleteUser).
+		Methods("POST").
+		Schemes("http")
+
 	return router
 }
 
@@ -33,4 +37,8 @@ func populateUserManagementPage(w http.ResponseWriter, r *http.Request) {
 
 func assignUserModuleGroupPermission(w http.ResponseWriter, r *http.Request) {
 	AssignUserModuleGroupPermission(w, r)
+}
+
+func deleteUser(w http.ResponseWriter, r *http.Request) {
+	DeleteUser(w, r)
 }

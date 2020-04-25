@@ -290,3 +290,48 @@ func GetModuleGroupsByLabelMatch(moduleGroupLabel string) ([]models.ModuleGroup,
 
 	return moduleGroups, err
 }
+
+func GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel string, userID int) ([]models.ModuleGroup, error) {
+	var moduleGroups []models.ModuleGroup
+	var err error
+
+	sqlStatement :=
+		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID, locationid,Param_TDs, Param_PH, 
+		Param_Humidity, onauto,LightsOnHour, LightsOffHour, TimerLastReset
+		FROM ModuleGroup WHERE Lower(ModuleGroupLabel) LIKE $1||'%' AND IN (SELECT modulegroupid from permission where userid=$2);`
+	db := database.GetDB()
+	rows, err := db.Query(sqlStatement, strings.ToLower(moduleGroupLabel), userID)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	for rows.Next() {
+		moduleGroup := models.ModuleGroup{}
+
+		err := rows.Scan(
+			&moduleGroup.ModuleGroupID,
+			&moduleGroup.ModuleGroupLabel,
+			&moduleGroup.PlantID,
+			&moduleGroup.LocationID,
+			&moduleGroup.TDS,
+			&moduleGroup.PH,
+			&moduleGroup.Humidity,
+			&moduleGroup.OnAuto,
+			&moduleGroup.LightsOnHour,
+			&moduleGroup.LightsOffHour,
+			&moduleGroup.TimerLastReset,
+		)
+		if err != nil {
+			log.Println(err)
+			return nil, err
+
+		}
+
+		moduleGroups = append(moduleGroups, moduleGroup)
+	}
+
+	log.Println("Variable moduleGroups in GetModuleGroups by ID", moduleGroups)
+
+	return moduleGroups, err
+}

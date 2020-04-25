@@ -93,3 +93,33 @@ func AssignUserModuleGroupPermission(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Successful"))
 }
+
+func DeleteUser(w http.ResponseWriter, r *http.Request) {
+	if !jwt.AuthenticateUserToken(w, r) {
+		return
+	}
+
+	type Input struct {
+		Username string `json:"username"`
+	}
+
+	var input Input
+
+	success := jsonhandler.DecodeJsonFromBody(w, r, &input)
+	if !success {
+		return
+	}
+	fmt.Printf("%+v", input)
+
+	err := user.DeleteUserByUsername(input.Username)
+	if err != nil {
+		msg := "Error: Failed to Delete User By Username"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Successful"))
+
+}

@@ -52,6 +52,9 @@ func ResetTimer(moduleGroupID int) error {
 func GetOnAutoByModuleID(moduleID int) (bool, error) {
 	return repository.GetOnAutoByModuleID(moduleID)
 }
-func GetModuleGroupsByLabelMatch(moduleGroupLabel string)([]models.ModuleGroup,error){
+func GetModuleGroupsByLabelMatch(moduleGroupLabel string) ([]models.ModuleGroup, error) {
 	return repository.GetModuleGroupsByLabelMatch(moduleGroupLabel)
+}
+func GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel string, userID int) ([]models.ModuleGroup, error) {
+	return repository.GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel, userID)
 }

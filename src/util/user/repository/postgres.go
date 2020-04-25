@@ -239,3 +239,13 @@ func ChangePassword(username string, newPassword string) error {
 
 	return nil
 }
+
+func DeleteUserByUsername(username string) error {
+	db := database.GetDB()
+
+	sqlStatement := `DELETE FROM Users WHERE Username = $1`
+
+	_, err := db.Query(sqlStatement, username)
+
+	return err
+}
