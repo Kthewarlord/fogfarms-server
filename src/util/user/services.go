@@ -166,3 +166,6 @@ func ExistsByID(userID int) (bool, *models.User, error) {
 func ChangePassword(username string, newPassword string) error {
 	return repository.ChangePassword(username, newPassword)
 }
+func DeleteUserByUsername(username string) error {
+	return repository.DeleteUserByUsername(username)
+}
