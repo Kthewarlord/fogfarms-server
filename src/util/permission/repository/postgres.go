@@ -77,6 +77,13 @@ func AssignUserModuleGroupPermission(username string, moduleGroupLabel string, l
 		log.Println(err)
 		return err
 	}
+	if level == 0 {
+		_, err = db.Exec(`DELETE FROM Permission where permissionlevel=0`)
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+	}
 
 	return nil
 }
@@ -85,10 +92,10 @@ func GetAssignedModuleGroupsWithPermissionLevel(userID int, permissionLevel int)
 	db := database.GetDB()
 
 	sqlStatement :=
-		`SELECT m.ModuleGroupID, m.ModuleGroupID, m.PlantID, m.LocationID, m.Param_TDS, m.Param_PH, m.Param_Humidity,
+		`SELECT m.ModuleGroupID, m.ModuleGroupLabel, m.PlantID, m.LocationID, m.Param_TDS, m.Param_PH, m.Param_Humidity,
        m.onAuto, m.LightsOffHour, m.LightsOnHour, m.timerlastreset, p.PermissionLevel
 		FROM ModuleGroup m, Permission p 
-		WHERE p.UserID = $1 AND m.ModuleGroupID = p.ModuleGroupID`
+		WHERE p.UserID = $1 AND m.ModuleGroupID = p.ModuleGroupID AND p.permissionlevel!=0`
 
 	sqlStatementPermissionLevel := ` AND p.PermissionLevel = $2`
 

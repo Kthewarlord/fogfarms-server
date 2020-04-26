@@ -82,7 +82,6 @@ func PopulateModuleGroupManagementPage(w http.ResponseWriter, r *http.Request) {
 			log.Println(err)
 			return
 		}
-		log.Println(mapModuleGroupPermissions)
 		for mg := range mapModuleGroupPermissions {
 
 			moduleGroupMap[mg.ModuleGroupLabel] = &ModuleGroupData{
@@ -104,6 +103,7 @@ func PopulateModuleGroupManagementPage(w http.ResponseWriter, r *http.Request) {
 
 	}
 
+	log.Println("hi", moduleGroupIDs)
 	modules, err := module.GetModulesByModuleGroupIDsForModuleManagement(moduleGroupIDs)
 	if err != nil {
 		msg := "Error: Failed to Get Modules By ModuleGroupIDs"
@@ -111,8 +111,10 @@ func PopulateModuleGroupManagementPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println("hi", modules)
 	for _, m := range modules {
 		log.Println(m.ModuleLabel)
+		log.Println(m.ModuleGroupLabel)
 		moduleGroupMap[m.ModuleGroupLabel].Modules = append(moduleGroupMap[m.ModuleGroupLabel].Modules, m.ModuleID)
 	}
 	jsonData, err = json.Marshal(moduleGroupMap)
