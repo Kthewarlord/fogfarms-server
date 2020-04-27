@@ -358,7 +358,7 @@ func DeleteModule(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type Input struct {
-		ModuleLabel string `json:"module_label"`
+		ModuleID int `json:"module_id"`
 	}
 
 	input := Input{}
@@ -367,7 +367,7 @@ func DeleteModule(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := module.DeleteModule(input.ModuleLabel)
+	err := module.DeleteModule(input.ModuleID)
 	if err != nil {
 		msg := "Error: Failed to Create Module"
 		http.Error(w, msg, http.StatusInternalServerError)
@@ -403,4 +403,44 @@ func EditModuleLabel(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Successful"))
+}
+func GetModuleLabel(w http.ResponseWriter, r *http.Request) {
+	if !jwt.AuthenticateUserToken(w, r) {
+		return
+	}
+
+	type Input struct {
+		ModuleID int `json:"module_id"`
+	}
+
+	input := Input{}
+	success := jsonhandler.DecodeJsonFromBody(w, r, &input)
+	if !success {
+		return
+	}
+
+	moduleLabel, err := module.GetModuleLabel(input.ModuleID)
+	if err != nil {
+		msg := "Error: Failed to Edit Module Label"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+
+	type Output struct {
+		ModuleLabel string `json:"module_label"`
+	}
+
+	output := Output{ModuleLabel: moduleLabel}
+
+	jsonData, err := json.Marshal(output)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }

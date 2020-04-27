@@ -10,8 +10,8 @@ func CreateModule(moduleLabel string) error {
 	return repository.CreateModule(moduleLabel)
 }
 
-func DeleteModule(moduleLabel string) error {
-	return repository.DeleteModule(moduleLabel)
+func DeleteModule(moduleId int) error {
+	return repository.DeleteModule(moduleId)
 }
 
 func EditModuleLabel(moduleID int, moduleLabel string) error {
@@ -41,4 +41,7 @@ func UpdateDeviceStatus(moduleID int, mixer []bool, solenoidValves []bool, led [
 
 func GetDeviceStatus(moduleID int) ([]bool, []bool, []bool, []bool, error) {
 	return repository.GetDeviceStatus(moduleID)
+}
+func GetModuleLabel(moduleID int) (string, error) {
+	return repository.GetModuleLabel(moduleID)
 }

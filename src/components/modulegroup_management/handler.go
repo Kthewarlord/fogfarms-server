@@ -48,6 +48,10 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
+	router.HandleFunc("/modulegroup_management/get_module_label", getModuleLabel).
+		Methods("POST").
+		Schemes("http")
+
 	return router
 }
 
@@ -85,4 +89,8 @@ func deleteModule(w http.ResponseWriter, r *http.Request) {
 
 func editModuleLabel(w http.ResponseWriter, r *http.Request) {
 	EditModuleLabel(w, r)
+}
+
+func getModuleLabel(w http.ResponseWriter, r *http.Request) {
+	GetModuleLabel(w, r)
 }

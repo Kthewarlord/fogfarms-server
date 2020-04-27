@@ -9,7 +9,7 @@ func GetAllLocations() ([]models.Location, error) {
 	db := database.GetDB()
 
 	sqlStatement :=
-		`SELECT locationid, city, province FROM Location;`
+		`SELECT locationid, city, province FROM Location where locationid !=0;`
 
 	rows, err := db.Query(sqlStatement)
 	if err != nil {

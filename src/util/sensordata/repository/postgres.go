@@ -28,7 +28,15 @@ func GetLatestSensorData(moduleGroupID int) (map[string]*outputs.Dashboardoutput
 	log.Println(moduleIDs)
 	db := database.GetDB()
 
-	sqlStatement := `select modulelabel,sensordata.moduleid,sensordata.timestamp,arrnutrientunittds,arrnutrientunitph,arrnutrientunitsolutiontemperature,arrgrowunitlux,arrgrowunithumidity,arrgrowunittemperature,nutrientamount from sensordata inner join (SELECT moduleid, max(timestamp) AS maxtime FROM sensordata GROUP BY moduleid) as maxTable on maxTable.moduleid=sensordata.moduleid AND sensordata.timestamp=maxTable.maxtime inner join (select moduleid, count(*) as nutrientamount from nutrientunit group by moduleid) AS nutrient on nutrient.moduleid = sensordata.moduleid AND nutrient.moduleid=maxTable.moduleid inner join module on module.moduleid=sensordata.moduleid where sensordata.moduleid = ANY($1);`
+	sqlStatement := `select modulelabel,module.moduleid,coalesce(sensordata.timestamp,NOW()),coalesce(arrnutrientunittds,'{}'),coalesce(arrnutrientunitph,'{}'),
+	coalesce(arrnutrientunitsolutiontemperature,'{}'),coalesce(arrgrowunitlux,'{}'),coalesce(arrgrowunithumidity,'{}'),coalesce(arrgrowunittemperature,'{}'),coalesce(nutrientamount,0) 
+	from sensordata inner join (SELECT moduleid, max(timestamp) AS maxtime 
+		FROM sensordata GROUP BY moduleid) as maxTable 
+		on maxTable.moduleid=sensordata.moduleid 
+		AND sensordata.timestamp=maxTable.maxtime 
+		LEFT join (select moduleid, count(*) as nutrientamount from nutrientunit group by moduleid) 
+		AS nutrient on nutrient.moduleid = sensordata.moduleid AND nutrient.moduleid=maxTable.moduleid 
+		RIGHT join module on module.moduleid=sensordata.moduleid where module.moduleid = ANY($1);`
 	rows, err := db.Query(sqlStatement, pq.Array(moduleIDs))
 	if err != nil {
 		return nil, err

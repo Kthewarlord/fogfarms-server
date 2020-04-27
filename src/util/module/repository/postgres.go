@@ -90,12 +90,12 @@ func AssignModulesToModuleGroup(moduleGroupID int, moduleIDs []int) error {
 	return err
 }
 
-func DeleteModule(moduleLabel string) error {
+func DeleteModule(moduleId int) error {
 	db := database.GetDB()
 
-	sqlStatement := `DELETE FROM Module WHERE ModuleLabel = $1;`
+	sqlStatement := `DELETE FROM Module WHERE ModuleID = $1;`
 
-	_, err := db.Exec(sqlStatement, moduleLabel)
+	_, err := db.Exec(sqlStatement, moduleId)
 	if err != nil {
 		return err
 	}
@@ -195,4 +195,26 @@ func UpdateDeviceStatus(moduleID int, mixer []bool, solenoidValves []bool, led [
 	}
 
 	return nil
+}
+
+func GetModuleLabel(moduleID int) (string, error) {
+	db := database.GetDB()
+
+	sqlStatement := `SELECT ModuleLabel From Module WHERE ModuleID = $1`
+
+	rows, err := db.Query(sqlStatement, moduleID)
+	if err != nil {
+		return "", err
+	}
+	defer rows.Close()
+
+	var moduleLabel string
+	for rows.Next() {
+		err = rows.Scan(&moduleLabel)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	return moduleLabel, nil
 }
