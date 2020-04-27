@@ -137,9 +137,9 @@ func CreateModuleGroup(w http.ResponseWriter, r *http.Request) {
 	type Input struct {
 		PlantID          int     `json:"plant_id"`
 		LocationID       int     `json:"location_id"`
-		TDS              float64 `json:"param_tds"`
-		PH               float64 `json:"param_ph"`
-		Humidity         float64 `json:"param_humidity"`
+		TDS              float64 `json:"tds"`
+		PH               float64 `json:"ph"`
+		Humidity         float64 `json:"humidity"`
 		OnAuto           bool    `json:"on_auto"`
 		ModuleGroupLabel string  `json:"module_group_label"`
 		LightsOffHour    float64 `json:"lights_off_hour"`
