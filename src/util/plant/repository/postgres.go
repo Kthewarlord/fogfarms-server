@@ -38,7 +38,7 @@ func GetPlantByID(plantID int) (*models.Plant, error) {
 func GetAllPlants() ([]models.Plant, error) {
 	db := database.GetDB()
 
-	sqlStatement := `SELECT * FROM Plant where plantid !=0`
+	sqlStatement := `SELECT * FROM Plant`
 
 	rows, err := db.Query(sqlStatement)
 	if err != nil {
