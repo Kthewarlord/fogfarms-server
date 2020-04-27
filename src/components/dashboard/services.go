@@ -181,9 +181,9 @@ func UpdateDeviceStatus(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetSensorDataHistory(w http.ResponseWriter, r *http.Request) {
-	// if !jwt.AuthenticateUserToken(w, r) {
-	// 	return
-	// }
+	if !jwt.AuthenticateUserToken(w, r) {
+		return
+	}
 
 	type Input struct {
 		ModuleGroupID int       `json:"module_group_id"`
