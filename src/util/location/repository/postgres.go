@@ -23,8 +23,8 @@ func GetAllLocations() ([]models.Location, error) {
 
 		err := rows.Scan(
 			&location.LocationID,
-			location.City,
-			location.Province,
+			&location.City,
+			&location.Province,
 		)
 		if err != nil {
 			return nil, err
