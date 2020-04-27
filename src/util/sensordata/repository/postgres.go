@@ -110,13 +110,14 @@ func GetSensorDataHistory(moduleGroupID int, timeBegin time.Time, timeEnd time.T
 	}
 
 	db := database.GetDB()
-
+	log.Println(moduleIDs)
 	sqlStatement :=
 		`SELECT Module.ModuleLabel, SensorData.Timestamp, SensorData.ArrNutrientUnitTDS, SensorData.ArrNutrientUnitPH, SensorData.ArrNutrientUnitSolutionTemperature, SensorData.ArrGrowUnitLux, SensorData.ArrGrowUnitHumidity, SensorData.ArrGrowUnitTemperature
 		FROM Module, SensorData
 		WHERE SensorData.Timestamp >= $1
 		  AND SensorData.Timestamp <= $2
-		  AND SensorData.ModuleID = ANY($3);`
+		  AND SensorData.ModuleID = ANY($3)
+		  AND module.moduleID=Sensordata.moduleid;`
 
 	rows, err := db.Query(sqlStatement, timeBegin, timeEnd, pq.Array(moduleIDs))
 	if err != nil {

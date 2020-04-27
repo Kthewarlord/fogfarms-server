@@ -51,6 +51,7 @@ func GetModulesByModuleGroupIDs(moduleGroupIDs []int) ([]models.Module, error) {
 
 		modules = append(modules, module)
 	}
+	log.Println(modules)
 	return modules, nil
 }
 
