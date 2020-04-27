@@ -52,6 +52,10 @@ func MakeHTTPHandler() http.Handler {
 		Methods("POST").
 		Schemes("http")
 
+	router.HandleFunc("/modulegroup_management/get_all_location", getAllLocations).
+		Methods("GET").
+		Schemes("http")
+
 	return router
 }
 
@@ -93,4 +97,7 @@ func editModuleLabel(w http.ResponseWriter, r *http.Request) {
 
 func getModuleLabel(w http.ResponseWriter, r *http.Request) {
 	GetModuleLabel(w, r)
+}
+func getAllLocations(w http.ResponseWriter, r *http.Request) {
+	GetAllLocations(w, r)
 }

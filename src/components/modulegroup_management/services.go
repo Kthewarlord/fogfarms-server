@@ -10,6 +10,7 @@ import (
 
 	"github.com/KitaPDev/fogfarms-server/src/components/auth/jwt"
 	"github.com/KitaPDev/fogfarms-server/src/jsonhandler"
+	"github.com/KitaPDev/fogfarms-server/src/util/location"
 	"github.com/KitaPDev/fogfarms-server/src/util/module"
 	"github.com/KitaPDev/fogfarms-server/src/util/modulegroup"
 	"github.com/KitaPDev/fogfarms-server/src/util/permission"
@@ -432,6 +433,35 @@ func GetModuleLabel(w http.ResponseWriter, r *http.Request) {
 
 	output := Output{ModuleLabel: moduleLabel}
 
+	jsonData, err := json.Marshal(output)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
+}
+func GetAllLocations(w http.ResponseWriter, r *http.Request) {
+	if !jwt.AuthenticateUserToken(w, r) {
+		return
+	}
+
+	locations, err := location.GetAllLocations()
+	if err != nil {
+		msg := "Error: Failed to Get All Locations"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+
+	type Output struct {
+		Locations []models.Location `json:"locations"`
+	}
+
+	output := Output{Locations: locations}
 	jsonData, err := json.Marshal(output)
 	if err != nil {
 		msg := "Error: Failed to marshal JSON"
