@@ -13,7 +13,7 @@ func GetAllModuleGroups() ([]models.ModuleGroup, error) {
 	db := database.GetDB()
 
 	sqlStatement :=
-		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID, Param_TDs, Param_PH, 
+		`SELECT ModuleGroupID, ModuleGroupLabel, onauto,PlantID, Param_TDs, Param_PH, 
 		Param_Humidity, LightsOnHour, LightsOffHour, TimerLastReset FROM ModuleGroup;`
 
 	rows, err := db.Query(sqlStatement)
@@ -29,6 +29,7 @@ func GetAllModuleGroups() ([]models.ModuleGroup, error) {
 		err := rows.Scan(
 			&moduleGroup.ModuleGroupID,
 			&moduleGroup.ModuleGroupLabel,
+			&moduleGroup.OnAuto,
 			&moduleGroup.PlantID,
 			&moduleGroup.TDS,
 			&moduleGroup.PH,
