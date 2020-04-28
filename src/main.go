@@ -7,6 +7,7 @@ import (
 
 	"github.com/KitaPDev/fogfarms-server/src/components/auth/jwt"
 	"github.com/KitaPDev/fogfarms-server/src/components/dashboard"
+	"github.com/KitaPDev/fogfarms-server/src/components/iot"
 	"github.com/KitaPDev/fogfarms-server/src/components/modulegroup_management"
 	"github.com/KitaPDev/fogfarms-server/src/components/plant_management"
 	"github.com/KitaPDev/fogfarms-server/src/components/user_management"
@@ -39,10 +40,13 @@ func run() error {
 	router.PathPrefix("/plant_management").Handler(plantManagementHandler)
 
 	dashBoardHandler := dashboard.MakeHTTPHandler()
-
 	router.PathPrefix("/dashboard").Handler(dashBoardHandler)
+
 	testHanlder := test.MakeHTTPHandler()
 	router.PathPrefix("/test").Handler(testHanlder)
+
+	iotHanlder := iot.MakeHTTPHandler()
+	router.PathPrefix("/iot").Handler(iotHanlder)
 	//router.Use(mux.CORSMethodMiddleware(router))
 	handler := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:3000", "https://localhost:3000", "https://25.22.245.97:3000"},
