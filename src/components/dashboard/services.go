@@ -216,3 +216,36 @@ func GetSensorDataHistory(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonData)
 }
+
+func GetModuleGroupInfo(w http.ResponseWriter, r *http.Request) {
+	if !jwt.AuthenticateUserToken(w, r) {
+		return
+	}
+	type Input struct {
+		ModuleGroupID int `json:"module_group_id"`
+	}
+	var input Input
+
+	success := jsonhandler.DecodeJsonFromBody(w, r, &input)
+	if !success {
+		return
+	}
+	data, err := modulegroup.GetModuleGroupByModuleGroupID(input.ModuleGroupID)
+	if err != nil {
+		msg := "Error: Failed to Get SensorData History"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
+
+}

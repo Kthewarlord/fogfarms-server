@@ -11,6 +11,9 @@ func MakeHTTPHandler() http.Handler {
 	router.HandleFunc("/dashboard", populateDashboard).
 		Methods("POST").
 		Schemes("http")
+	router.HandleFunc("/dashboard/module_group", getModuleGroupInfo).
+		Methods("POST").
+		Schemes("http")
 
 	router.HandleFunc("/dashboard/toggle_auto", toggleAuto).
 		Methods("POST").
@@ -57,4 +60,8 @@ func updateDeviceStatus(w http.ResponseWriter, r *http.Request) {
 
 func history(w http.ResponseWriter, r *http.Request) {
 	GetSensorDataHistory(w, r)
+}
+
+func getModuleGroupInfo(w http.ResponseWriter, r *http.Request) {
+	GetModuleGroupInfo(w, r)
 }

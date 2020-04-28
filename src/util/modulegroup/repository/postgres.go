@@ -337,3 +337,48 @@ func GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel string, userID int) (
 
 	return moduleGroups, err
 }
+
+func GetModuleGroupByModuleGroupID(moduleGroupID int) ([]models.ModuleGroup, error) {
+	sqlStatement :=
+		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID, locationid,Param_TDs, Param_PH, 
+	Param_Humidity, onauto,LightsOnHour, LightsOffHour, TimerLastReset
+	FROM ModuleGroup WHERE modulegroupid=$1 ;`
+	db := database.GetDB()
+	var moduleGroups []models.ModuleGroup
+
+	rows, err := db.Query(sqlStatement, moduleGroupID)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	for rows.Next() {
+		moduleGroup := models.ModuleGroup{}
+
+		err := rows.Scan(
+			&moduleGroup.ModuleGroupID,
+			&moduleGroup.ModuleGroupLabel,
+			&moduleGroup.PlantID,
+			&moduleGroup.LocationID,
+			&moduleGroup.TDS,
+			&moduleGroup.PH,
+			&moduleGroup.Humidity,
+			&moduleGroup.OnAuto,
+			&moduleGroup.LightsOnHour,
+			&moduleGroup.LightsOffHour,
+			&moduleGroup.TimerLastReset,
+		)
+		if err != nil {
+			log.Println(err)
+			return nil, err
+
+		}
+
+		moduleGroups = append(moduleGroups, moduleGroup)
+	}
+
+	log.Println("Variable moduleGroups in GetModuleGroups by ID", moduleGroups)
+
+	return moduleGroups, err
+
+}
