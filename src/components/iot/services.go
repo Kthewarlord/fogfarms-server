@@ -2,12 +2,13 @@ package iot
 
 import (
 	"encoding/json"
+	"log"
+	"net/http"
+
 	"github.com/KitaPDev/fogfarms-server/src/jsonhandler"
 	"github.com/KitaPDev/fogfarms-server/src/util/module"
 	"github.com/KitaPDev/fogfarms-server/src/util/modulegroup"
 	"github.com/KitaPDev/fogfarms-server/src/util/sensordata"
-	"log"
-	"net/http"
 )
 
 func Update(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +28,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	moduleID, err := module.GetModuleIDByToken(input.Token)
-	if err != nil {
+	if err != nil || moduleID == 0 {
 		msg := "Error: Failed to Get ModuleID By Token"
 		http.Error(w, msg, http.StatusInternalServerError)
 		return
