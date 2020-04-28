@@ -58,6 +58,6 @@ func GetModuleGroupsByLabelMatch(moduleGroupLabel string) ([]models.ModuleGroup,
 func GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel string, userID int) ([]models.ModuleGroup, error) {
 	return repository.GetModuleGroupsByLabelMatchForNormal(moduleGroupLabel, userID)
 }
-func GetModuleGroupByModuleGroupID(modulegroupID int) ([]models.ModuleGroup, error) {
+func GetModuleGroupByModuleGroupID(modulegroupID int) (models.ModuleGroup, error) {
 	return repository.GetModuleGroupByModuleGroupID(modulegroupID)
 }
