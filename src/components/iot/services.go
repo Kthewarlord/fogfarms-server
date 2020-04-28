@@ -65,7 +65,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	log.Println([]int{moduleID})
-	modulegroup, err := modulegroup.GetModuleGroupsByIDs([]int{moduleID})
+	modulegroup, err := modulegroup.GetModuleGroupsByModuleID(moduleID)
 	log.Println(modulegroup)
 	fogger, led, mixer, solenoidValve, err := module.GetDeviceStatus(moduleID)
 	if err != nil {

@@ -381,3 +381,43 @@ func GetModuleGroupByModuleGroupID(moduleGroupID int) (models.ModuleGroup, error
 	return moduleGroup, err
 
 }
+
+func GetModuleGroupsByModuleID(moduleID int) (models.ModuleGroup, error) {
+	sqlStatement :=
+		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID, locationid,Param_TDs, Param_PH, 
+	Param_Humidity, onauto,LightsOnHour, LightsOffHour, TimerLastReset
+	FROM ModuleGroup  WHERE modulegroupid IN (SELECT modulegroupid from module where moduleid=$1) ;`
+	db := database.GetDB()
+	moduleGroup := models.ModuleGroup{}
+
+	rows, err := db.Query(sqlStatement, moduleID)
+	if err != nil {
+		log.Println(err)
+		return moduleGroup, err
+	}
+
+	for rows.Next() {
+
+		err := rows.Scan(
+			&moduleGroup.ModuleGroupID,
+			&moduleGroup.ModuleGroupLabel,
+			&moduleGroup.PlantID,
+			&moduleGroup.LocationID,
+			&moduleGroup.TDS,
+			&moduleGroup.PH,
+			&moduleGroup.Humidity,
+			&moduleGroup.OnAuto,
+			&moduleGroup.LightsOnHour,
+			&moduleGroup.LightsOffHour,
+			&moduleGroup.TimerLastReset,
+		)
+		if err != nil {
+			log.Println(err)
+			return moduleGroup, err
+
+		}
+
+	}
+
+	return moduleGroup, err
+}
