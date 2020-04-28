@@ -166,7 +166,7 @@ func SetEnvironmentParameters(moduleGroupID int, humidity float64, ph float64, t
 			SET Param_Humidity = $1, Param_PH = $2, Param_TDS = $3, LightsOnHour = $4, 
 				LightsOffHour = $5
 			WHERE ModuleGroupID = $6`
-	_, err := db.Exec(sqlStatement, humidity, ph, tds, lightsOffHour, lightsOnHour, moduleGroupID)
+	_, err := db.Exec(sqlStatement, humidity, ph, tds, lightsOnHour, lightsOffHour, moduleGroupID)
 	if err != nil {
 		return err
 	}

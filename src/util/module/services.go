@@ -45,3 +45,7 @@ func GetDeviceStatus(moduleID int) ([]bool, []bool, []bool, []bool, error) {
 func GetModuleLabel(moduleID int) (string, error) {
 	return repository.GetModuleLabel(moduleID)
 }
+
+func VerifyAssignModulesToModuleGroup(userID int, moduleGroupID int, moduleIDs []int) bool {
+	return repository.VerifyAssignModulesToModuleGroup(userID, moduleGroupID, moduleIDs)
+}

@@ -101,3 +101,7 @@ func getModuleLabel(w http.ResponseWriter, r *http.Request) {
 func getAllLocations(w http.ResponseWriter, r *http.Request) {
 	GetAllLocations(w, r)
 }
+
+func getModuleGroupByMatchedLabel(w http.ResponseWriter, r *http.Request) {
+	GetModuleGroupByMatchedLabel(w, r)
+}

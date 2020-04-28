@@ -1,10 +1,11 @@
 package module_management
 
 import (
+	"net/http"
+
 	"github.com/KitaPDev/fogfarms-server/src/components/auth/jwt"
 	"github.com/KitaPDev/fogfarms-server/src/jsonhandler"
 	"github.com/KitaPDev/fogfarms-server/src/util/module"
-	"net/http"
 )
 
 func CreateModule(w http.ResponseWriter, r *http.Request) {

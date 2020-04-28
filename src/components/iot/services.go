@@ -63,61 +63,39 @@ func Update(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, msg, http.StatusInternalServerError)
 			return
 		}
-
-		type Output struct {
-			OnAuto bool `json:"on_auto"`
-		}
-
-		output := Output{
-			OnAuto: onAuto,
-		}
-
-		jsonData, err := json.Marshal(output)
-		if err != nil {
-			msg := "Error: Failed to marshal JSON"
-			http.Error(w, msg, http.StatusInternalServerError)
-			log.Println(err)
-			return
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		w.Write(jsonData)
-
-	} else {
-		fogger, led, mixer, solenoidValve, err := module.GetDeviceStatus(moduleID)
-		if err != nil {
-			msg := "Error: Failed to Get Device Status"
-			http.Error(w, msg, http.StatusInternalServerError)
-			return
-		}
-
-		type Output struct {
-			OnAuto         bool   `json:"on_auto"`
-			Foggers        []bool `json:"foggers"`
-			LEDs           []bool `json:"leds"`
-			Mixers         []bool `json:"mixers"`
-			SolenoidValves []bool `json:"solenoid_valves"`
-		}
-
-		output := Output{
-			OnAuto:         onAuto,
-			Foggers:        fogger,
-			LEDs:           led,
-			Mixers:         mixer,
-			SolenoidValves: solenoidValve,
-		}
-
-		jsonData, err := json.Marshal(output)
-		if err != nil {
-			msg := "Error: Failed to marshal JSON"
-			http.Error(w, msg, http.StatusInternalServerError)
-			log.Println(err)
-			return
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		w.Write(jsonData)
 	}
+	fogger, led, mixer, solenoidValve, err := module.GetDeviceStatus(moduleID)
+	if err != nil {
+		msg := "Error: Failed to Get Device Status"
+		http.Error(w, msg, http.StatusInternalServerError)
+		return
+	}
+
+	type Output struct {
+		OnAuto         bool   `json:"on_auto"`
+		Foggers        []bool `json:"foggers"`
+		LEDs           []bool `json:"leds"`
+		Mixers         []bool `json:"mixers"`
+		SolenoidValves []bool `json:"solenoid_valves"`
+	}
+
+	output := Output{
+		OnAuto:         onAuto,
+		Foggers:        fogger,
+		LEDs:           led,
+		Mixers:         mixer,
+		SolenoidValves: solenoidValve,
+	}
+
+	jsonData, err := json.Marshal(output)
+	if err != nil {
+		msg := "Error: Failed to marshal JSON"
+		http.Error(w, msg, http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
 }
