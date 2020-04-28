@@ -64,6 +64,9 @@ func Update(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	log.Println([]int{moduleID})
+	modulegroup, err := modulegroup.GetModuleGroupsByIDs([]int{moduleID})
+	log.Println(modulegroup)
 	fogger, led, mixer, solenoidValve, err := module.GetDeviceStatus(moduleID)
 	if err != nil {
 		msg := "Error: Failed to Get Device Status"
@@ -72,19 +75,32 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type Output struct {
-		OnAuto         bool   `json:"on_auto"`
-		Foggers        []bool `json:"foggers"`
-		LEDs           []bool `json:"leds"`
-		Mixers         []bool `json:"mixers"`
-		SolenoidValves []bool `json:"solenoid_valves"`
+		OnAuto         bool    `json:"on_auto"`
+		Foggers        []bool  `json:"foggers"`
+		LEDs           []bool  `json:"leds"`
+		Mixers         []bool  `json:"mixers"`
+		SolenoidValves []bool  `json:"solenoid_valves"`
+		TDS            float64 `json:"tds"`
+		PH             float64 `json:"ph"`
+		Humidity       float64 `json:"humidity"`
+		LightsOffHour  float64 `json:"lights_off_hour"`
+		LightsOnHour   float64 `json:"lights_on_hour"`
 	}
-
+	if len(modulegroup) == 0 {
+		http.Error(w, "err", http.StatusInternalServerError)
+		return
+	}
 	output := Output{
 		OnAuto:         onAuto,
 		Foggers:        fogger,
 		LEDs:           led,
 		Mixers:         mixer,
 		SolenoidValves: solenoidValve,
+		Humidity:       modulegroup[0].Humidity,
+		TDS:            modulegroup[0].TDS,
+		PH:             modulegroup[0].PH,
+		LightsOffHour:  modulegroup[0].LightsOffHour,
+		LightsOnHour:   modulegroup[0].LightsOnHour,
 	}
 
 	jsonData, err := json.Marshal(output)

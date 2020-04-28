@@ -88,8 +88,8 @@ func GetModuleGroupsByIDs(moduleGroupIDs []int) ([]models.ModuleGroup, error) {
 	var err error
 
 	sqlStatement :=
-		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID, Param_TDs, Param_PH, 
-		Param_Humidity, LightsOnHour, LightsOffHour, TimerLastReset
+		`SELECT ModuleGroupID, ModuleGroupLabel, PlantID,LocationID, Param_TDs, Param_PH, 
+		Param_Humidity, onauto,LightsOnHour, LightsOffHour, TimerLastReset
 		FROM ModuleGroup WHERE ModuleGroupID = ANY($1);`
 
 	db := database.GetDB()
@@ -117,6 +117,8 @@ func GetModuleGroupsByIDs(moduleGroupIDs []int) ([]models.ModuleGroup, error) {
 			&moduleGroup.TimerLastReset,
 		)
 		if err != nil {
+
+			log.Println("Variable moduleGroups in GetModuleGroups by ID", err)
 			return nil, err
 		}
 
