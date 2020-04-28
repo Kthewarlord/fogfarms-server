@@ -86,21 +86,18 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		LightsOffHour  float64 `json:"lights_off_hour"`
 		LightsOnHour   float64 `json:"lights_on_hour"`
 	}
-	if len(modulegroup) == 0 {
-		http.Error(w, "err", http.StatusInternalServerError)
-		return
-	}
+
 	output := Output{
 		OnAuto:         onAuto,
 		Foggers:        fogger,
 		LEDs:           led,
 		Mixers:         mixer,
 		SolenoidValves: solenoidValve,
-		Humidity:       modulegroup[0].Humidity,
-		TDS:            modulegroup[0].TDS,
-		PH:             modulegroup[0].PH,
-		LightsOffHour:  modulegroup[0].LightsOffHour,
-		LightsOnHour:   modulegroup[0].LightsOnHour,
+		Humidity:       modulegroup.Humidity,
+		TDS:            modulegroup.TDS,
+		PH:             modulegroup.PH,
+		LightsOffHour:  modulegroup.LightsOffHour,
+		LightsOnHour:   modulegroup.LightsOnHour,
 	}
 
 	jsonData, err := json.Marshal(output)
